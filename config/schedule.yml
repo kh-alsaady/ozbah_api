@@ -1,0 +1,14 @@
+DailyTasksWorker:
+  # Everyday at 12:00 PM and 6:00 PM
+  cron: "0 12,18 * * *"
+# you can use rufus-scheduler "every" syntax in place of cron if you prefer
+# every: 1h
+# class: "DailyTasksWorker"
+# queue: daily_tasks
+# args:
+  description: "This job executed twice everyday and send email notification for daily tasks"
+
+WeeklyTasksWorker:
+  # Every thursday and friday at 12:00 PM and 6:00 PM
+  cron: '0 12,18 * * 4,5'
+  description:  "This job executed on Thursday and Friday and send email notification for weekly tasks"
