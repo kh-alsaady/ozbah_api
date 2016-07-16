@@ -13,22 +13,15 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-<<<<<<< HEAD
+  # username: khalid
+  # password: khalid
   username: ozbah_api
   password: ozbah_api
-=======
-  username: root
-  password:
->>>>>>> 594aa6ae3826869849d270ce17caa5df865833c6
   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
-<<<<<<< HEAD
   database: ozbah_api
-=======
-  database: ozbah_api_development
->>>>>>> 594aa6ae3826869849d270ce17caa5df865833c6
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

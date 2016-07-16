@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
 
-<<<<<<< HEAD
-# gem 'rails-api'
-
 gem 'spring', :group => :development
 
 gem 'mysql2'
@@ -15,16 +12,7 @@ gem 'listen', group: :development
 gem 'resque', require: 'resque/server'
 gem 'resque-scheduler'
 gem 'sinatra', github: 'sinatra'
-=======
-gem 'rails-api'
-
-gem 'spring', :group => :development
-
-
-gem 'mysql2'
-
-
->>>>>>> 594aa6ae3826869849d270ce17caa5df865833c6
+gem 'byebug'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
