@@ -13,7 +13,7 @@ module CommonHelper
       # Send Email to Next User
       task_type = task.task_type.name.downcase
       # NotifierMailer.notify_user_for_task(task, next_user).deliver_now
-      sleep 3
+
       print(task.task_type.name, ': ', task.name,'===========>', next_user.full_name )
       puts
 
