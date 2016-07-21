@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20160716080950) do
 
-  create_table "archived_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "archived_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.integer  "task_id"
     t.datetime "created_at", null: false
@@ -21,13 +21,13 @@ ActiveRecord::Schema.define(version: 20160716080950) do
     t.index ["user_id"], name: "index_archived_tasks_on_user_id", using: :btree
   end
 
-  create_table "task_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "task_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",       default: "1"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
 
-  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "task_type_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160716080950) do
     t.index ["task_type_id"], name: "index_tasks_on_task_type_id", using: :btree
   end
 
-  create_table "user_task_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_task_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.integer  "task_id"
     t.integer  "order"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160716080950) do
     t.index ["user_id"], name: "index_user_task_orders_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "full_name",    default: ""
     t.string   "email",        default: ""
     t.integer  "weekly_order"

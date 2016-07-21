@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   # To display resque-scheduler tab in web ui app
   require 'resque-scheduler'
   require 'resque/scheduler/server'
-  
+
   mount Resque::Server, at: 'resque/'
+
+  namespace :api do
+    namespace :v1 do
+        resources :sessions
+    end
+  end
+
 end
