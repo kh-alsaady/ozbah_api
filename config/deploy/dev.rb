@@ -2,11 +2,11 @@ set :branch, "dev"
 set :application, "ozbah_api_dev"
 set :deploy_to, "/var/www/html/#{fetch(:application)}"
 
-server '52.37.95.86',
-  user: 'deployer',
+server '52.42.50.168',
+  user: 'ubuntu',
   roles: %w{web app db},
   ssh_options: {
-    user: 'deployer', # overrides user setting above
+    user: 'ubuntu', # overrides user setting above
     keys: %w(~/.ssh/id_rsa),
     forward_agent: false,
     auth_methods: %w(publickey)
