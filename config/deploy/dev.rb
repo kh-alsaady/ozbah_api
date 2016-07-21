@@ -18,7 +18,8 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command do
       on roles(:app), in: :sequence, wait: 1 do
-        execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
+        # execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
+        execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"        
       end
     	# on roles :app, except: {no_release: true} do
     	# 	run "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
