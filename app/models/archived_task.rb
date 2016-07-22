@@ -18,7 +18,6 @@ class ArchivedTask < ApplicationRecord
     last_archive_task = self.includes(:task => :task_type)
       .where('task_types.name = ?', task_type)
       .references(:task => :task_type).last
-
     # last_archive_task.user if last_archive_task
   end
 
@@ -30,13 +29,13 @@ class ArchivedTask < ApplicationRecord
 
   # Remove daily archived tasks old than 1 month
   def self.delete_daily_archived_tasks
-    allowed_date = self.daily_tasks.last.created_at - 1.month
-    self.daily_tasks.where("archived_tasks.created_at < ?", allowed_date).destroy_all
+    date = self.daily_tasks.last.created_at - 1.month
+    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all
   end
 
   # Remove weekly archived tasks old than 3 month
   def self.delete_weekly_archived_tasks
-    allowed_date = self.weekly_tasks.last.created_at - 3.month
-    self.weekly_tasks.where("archived_tasks.created_at < ?", allowed_date).destroy_all
+    date = self.weekly_tasks.last.created_at - 3.month
+    self.weekly_tasks.where("archived_tasks.created_at < ?", date).destroy_all
   end
 end

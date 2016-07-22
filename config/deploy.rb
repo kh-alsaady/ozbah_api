@@ -2,10 +2,17 @@
 lock '3.5.0'
 
 # lock '3.4.1'
+<<<<<<< Updated upstream
 set :application, "ozbah_api_dev"
 
 set :user, "ubuntu"
 set :deploy_to, "/var/www/html/#{fetch(:application)}"
+=======
+# set :application, "ozbah_api_dev"
+#
+set :user, "deployer"
+# set :deploy_to, "/var/www/html/#{fetch(:application)}"
+>>>>>>> Stashed changes
 #set :deploy_via, :remote_cache
 #set :use_sudo, false
 

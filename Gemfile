@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '~> 5.0.0'
 
 gem 'spring', :group => :development
@@ -24,7 +23,7 @@ gem 'byebug'
 gem 'unicorn'
 
 # Deploy with Capistrano
- gem 'capistrano', :group => :development
+ gem 'capistrano'
  # Official Ruby on Rails specific tasks for Capistrano http://www.capistranorb.com/
  gem 'capistrano-rails'
 
@@ -32,7 +31,7 @@ gem 'unicorn'
  gem 'capistrano-rvm'
 
  # Resque integration for Capistrano
- gem 'capistrano-resque', '~> 0.2.2', require: false
+ # gem 'capistrano-resque'#, '~> 0.2.2'#, require: false
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   require 'resque/scheduler/server'
 
   mount Resque::Server, at: 'resque/'
-
+  root to: 'api/v1/sessions#index'
   namespace :api do
     namespace :v1 do
         resources :sessions
