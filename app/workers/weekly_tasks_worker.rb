@@ -3,8 +3,9 @@ class WeeklyTasksWorker
 
   def self.perform
     # Get all weekly tasks
-    weekly_tasks = Task.weekly_tasks
-    CommonHelper.notify_users_for_tasks weekly_tasks
+    puts 'weekly tasks executed'
+    # weekly_tasks = Task.weekly_tasks
+    # CommonHelper.notify_users_for_tasks weekly_tasks
     # weekly_tasks.each do |task|
     #   # Get User to Notify for this task
     #   current_archived_user = ArchivedTask.current_archived_user_in_task task.id
