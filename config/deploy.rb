@@ -31,3 +31,11 @@ set :rvm_ruby_version, '2.3.0@ozbah_api_dev'
 
 # keep only the last 5 releases
 after :deploy, "deploy:cleanup"
+#
+set :resque_log_file, "log/resque.log"
+
+# Restart Resque worker after deploy is successful
+# after "deploy:restart", "resque:restart"
+
+# Restart Resque scheduler after deploy is successful
+# after "deploy:restart", "resque:scheduler:restart"

@@ -5,9 +5,8 @@ class DailyTasksWorker
 
   def self.perform
     # Get all dially tasks
-    puts 'Dailt tasks executed'
-    # daily_tasks = Task.daily_tasks
-    # CommonHelper.notify_users_for_tasks daily_tasks
+    daily_tasks = Task.daily_tasks
+    CommonHelper.notify_users_for_tasks daily_tasks
     # daily_tasks.each do |task|
     #   # Get User to Notify for this task
     #   current_archived_user = ArchivedTask.current_archived_user_in_task task.id

@@ -1,4 +1,5 @@
 set :branch, "dev"
+set :resque_rails_env, 'dev'
 set :application, "ozbah_api_dev"
 set :deploy_to, "/var/www/html/#{fetch(:application)}"
 
@@ -48,6 +49,8 @@ namespace :deploy do
     end
   end
 
+  after :publishing, :restart
+
   # desc "Make sure local git is in sync with remote."
 
   # task :check_revision do
@@ -61,9 +64,11 @@ namespace :deploy do
   # end
 
 end
+role :resque_worker, "52.32.142.241"
 
+role :resque_scheduler, "52.32.142.241"
 # ========== Callbacks =========== #
-after :deploy, "deploy:restart"
+# after :deploy, "deploy:restart"
 # after  :deploy, "deploy:setup_config"
 # after  :deploy, "deploy:symlink_config"
 # before :deploy, "deploy:check_revision"
