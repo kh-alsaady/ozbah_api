@@ -6,7 +6,7 @@ gem 'spring', :group => :development
 
 gem 'mysql2'
 
-gem 'listen', group: :development
+gem 'listen'
 
 gem 'resque', '~> 1.26.0', require: 'resque/server'
 gem 'resque-scheduler'

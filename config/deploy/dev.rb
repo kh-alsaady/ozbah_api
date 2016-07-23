@@ -2,7 +2,7 @@ set :branch, "dev"
 set :application, "ozbah_api_dev"
 set :deploy_to, "/var/www/html/#{fetch(:application)}"
 
-server '52.42.50.168',
+server '52.32.142.241',
   user: 'ubuntu',
   roles: %w{web app db},
   ssh_options: {
