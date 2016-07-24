@@ -12,6 +12,11 @@ class Api::V1::BaseController < ApplicationController
     render_response false, e.message, {}, 404
   end
 
+  # Handling RecordNotFound Exception
+  rescue_from Exception do |e|
+    render_response false, e.message, {}, 400
+  end
+
   # Handling InvalidLocale Exception
   rescue_from I18n::InvalidLocale do |e|
     render_response false, e.message, {}, 400
