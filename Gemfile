@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.3.0"
 # this directly update to project's gemset
 #ruby=2.3.0
-#ruby-gemset=ozbah_api
+#ruby-gemset=ozbah_api_dev
 
 gem 'rails', '~> 5.0.0'
 
