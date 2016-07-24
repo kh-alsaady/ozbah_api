@@ -1,5 +1,5 @@
 set :branch, "dev"
-set :resque_rails_env, 'dev'
+# set :resque_rails_env, 'dev'
 set :application, "ozbah_api_dev"
 set :deploy_to, "/var/www/html/#{fetch(:application)}"
 

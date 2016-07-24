@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+ruby "2.3.0"
+# this directly update to project's gemset
+#ruby=2.3.0
+#ruby-gemset=ozbah_api
+
 gem 'rails', '~> 5.0.0'
 
 gem 'spring', :group => :development
@@ -14,7 +19,7 @@ gem 'sinatra', github: 'sinatra'
 gem 'byebug'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -38,3 +43,9 @@ gem 'unicorn'
 
 # AMS brings convention over configuration to your JSON generation
 gem 'active_model_serializers'
+
+# To use Redis as no sql db
+gem 'redis'
+# gem 'redis-namespace'
+# gem 'redis-rails'
+# gem 'redis-rack-cache'

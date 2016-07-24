@@ -39,3 +39,4 @@ set :resque_log_file, "log/resque.log"
 
 # Restart Resque scheduler after deploy is successful
 # after "deploy:restart", "resque:scheduler:restart"
+# after "deploy:restart", "resque:scheduler"

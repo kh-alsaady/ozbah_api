@@ -56,6 +56,7 @@ GEM
     airbrussh (1.0.2)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.0.0)
+    bcrypt (3.1.11)
     builder (3.2.2)
     byebug (8.2.4)
     capistrano (3.5.0)
@@ -191,6 +192,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  bcrypt (~> 3.1.7)
   byebug
   capistrano
   capistrano-rails
@@ -198,11 +200,15 @@ DEPENDENCIES
   listen
   mysql2
   rails (~> 5.0.0)
+  redis
   resque (~> 1.26.0)
   resque-scheduler
   sinatra!
   spring
   unicorn
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
    1.12.5
