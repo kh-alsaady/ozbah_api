@@ -17,13 +17,12 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def destroy
-    return render_response true, 'success', {}, 200
-    # access_token = request.headers[:HTTP_ACCESS_TOKEN]
-    # if User.destroy_session access_token
-    #   render_response true, I18n.t('logout_success'), {}, 200
-    # else
-    #   render_response false, I18n.t('logout_success'), {}, 200
-    # end
+    access_token = request.headers[:HTTP_ACCESS_TOKEN]
+    if User.destroy_session access_token
+      render_response true, I18n.t('logout_success'), {}, 200
+    else
+      render_response false, I18n.t('logout_faild'), {}, 400
+    end
 
   end
 end

@@ -22,7 +22,7 @@
 en:
   invalid_email_format: 'Invalid email'
   logout_success: 'You logged out successfully'
-  logout_faild: 'log out faild '
+  logout_faild: 'logout faild '
   login_success: 'You logged in successfully'
   login_faild: 'username/email and password are incorrect'
   login_required: 'Token expired please login first'
