@@ -37,7 +37,7 @@ gem 'unicorn'
  gem 'capistrano-rvm'
 
  # Resque integration for Capistrano
- # gem 'capistrano-resque'#, '~> 0.2.2'#, require: false
+ gem 'capistrano-resque'#, '~> 0.2.2'#, require: false
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
