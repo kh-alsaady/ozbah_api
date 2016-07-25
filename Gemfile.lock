@@ -200,7 +200,7 @@ DEPENDENCIES
   byebug
   capistrano
   capistrano-rails
-  capistrano-resque
+  capistrano-resque (~> 0.2.2)
   capistrano-rvm
   listen
   mysql2
