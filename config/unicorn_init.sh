@@ -16,6 +16,7 @@ TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/var/www/html/ozbah_api_dev/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E dev"
+# CMD="cd $APP_ROOT;  ~/.rvm/bin/rvm 2.3.0@ozbah_api_dev do bin/bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E dev"
 AS_USER=ubuntu
 set -u
 #  ======================= End Configurable OPtions ========================== #
