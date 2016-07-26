@@ -23,6 +23,6 @@ class Api::V1::SessionsController < Api::V1::BaseController
     else
       render_response false, I18n.t('logout_faild'), {}, 400
     end
-
   end
+
 end
