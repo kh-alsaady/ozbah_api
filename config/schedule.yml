@@ -1,6 +1,6 @@
 DailyTasksWorker:
   # Everyday at 12:00 PM and 6:00 PM
-  cron: "0 12,18 * * *"
+  # cron: "0 12,18 * * *"
   cron: "0-59/30 * * * * * Mumbai"
 # you can use rufus-scheduler "every" syntax in place of cron if you prefer
 # every: 1h
