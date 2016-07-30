@@ -2,10 +2,7 @@ class Api::V1::BaseController < ApplicationController
   include RedisHelper
   include Responder
 
-  before_action :set_locale
-
-  # Check if user is authenticated
-  before_action :authenticate
+  before_action :set_locale, :authenticate
 
   # Handling RecordNotFound Exception
   rescue_from ActiveRecord::RecordNotFound do |e|
@@ -27,15 +24,16 @@ class Api::V1::BaseController < ApplicationController
     # set current_user user
     def current_user
       access_token =  request.headers[:HTTP_ACCESS_TOKEN]
-      api_token ||= ApiToken.eager_load(:user).where("access_token = ?", access_token).first
-      @current_user = api_token.user if api_token
+      @api_token ||= ApiToken.eager_load(:user).where("access_token = ?", access_token).first
+      @current_user = @api_token.user if @api_token
     end
 
     # Check if user is authenticated
     def authenticate
       access_token =  request.headers[:HTTP_ACCESS_TOKEN]
 
-      return render_response(false, I18n.t('login_required'), {}, 401) unless access_token #&& current_user #&& get_from_redis(["token_#{access_token}".to_sym], "users:user#{@current_user.id}:")
+      return render_response(false, I18n.t('login_required'), {}, 401) unless access_token &&
+        current_user && get_from_redis(["token_#{access_token}".to_sym], "users:user#{current_user.try :id}:")
     end
 
     def set_locale

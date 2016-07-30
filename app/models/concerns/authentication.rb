@@ -35,7 +35,6 @@ module Authentication
     #
     # end
 
-
   end
 
   module ClassMethods
@@ -74,7 +73,6 @@ module Authentication
   end
 
   # Instanse methods
-
   def refresh_token
     api_token = api_tokens.create
     api_token.access_token
