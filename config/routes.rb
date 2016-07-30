@@ -14,4 +14,6 @@ Rails.application.routes.draw do
     end
   end
 
+  match '*all' => 'application#cors', via: :options
+
 end
