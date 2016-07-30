@@ -7,10 +7,10 @@ Rails.application.routes.draw do
 
   mount Resque::Server, at: 'resque/'
 
-
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
         resource :sessions, only: [:create, :destroy]
+        resources :users, only: [:index]
     end
   end
 

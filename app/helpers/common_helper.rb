@@ -17,9 +17,8 @@ module CommonHelper
       print(task.task_type.name, ': ', task.name,'===========>', next_user.full_name )
       puts
 
-      # sleep 5
       # Update Current Archived User
-      ArchivedTask.create user: next_user, task: task
+      ArchivedTask.create user: next_user, task: task, status: 1
     end
   end
 end
