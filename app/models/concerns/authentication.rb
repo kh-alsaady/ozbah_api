@@ -9,43 +9,35 @@ module Authentication
     has_secure_password validations: false
 
     # Signup or login user using social networks
-    def self.social_signup social_type, social_id, user_params
-      profile_image     = user_params[:profile_image]
-      background_image  = user_params[:background_image]
-      @user_params      = user_params
-
-      user = User.find_by("#{social_type}_id": social_id )
-
-      # Register new user using specified social type
-      unless user.present?
-        # Uplaod profile_image and background_image to cloudinary if exist
-        upload_images profile_image, background_image
-
-        user = User.new @user_params
-        user.save!(:validate => false)
-      end
-
-      # Create new unique access token for the user in the db
-      access_token = user.refresh_token
-
-      # Store Authenication token in redis
-      $redis.set("token_#{access_token}", access_token)
-
-      user
-
-    end
+    # def self.social_signup social_type, social_id, user_params
+    #   profile_image     = user_params[:profile_image]
+    #   background_image  = user_params[:background_image]
+    #   @user_params      = user_params
+    #
+    #   user = User.find_by("#{social_type}_id": social_id )
+    #
+    #   # Register new user using specified social type
+    #   unless user.present?
+    #     # Uplaod profile_image and background_image to cloudinary if exist
+    #     upload_images profile_image, background_image
+    #
+    #     user = User.new @user_params
+    #     user.save!(:validate => false)
+    #   end
+    #
+    #   # Create new unique access token for the user in the db
+    #   access_token = user.refresh_token
+    #
+    #   # Store Authenication token in redis
+    #   $redis.set("token_#{access_token}", access_token)
+    #
+    #   user
+    #
+    # end
 
 
   end
 
-  # Instanse methods =======================================>> #
-
-  def refresh_token
-    api_token = api_tokens.create
-    api_token.access_token
-  end
-
-  # Class methods ======================================>
   module ClassMethods
     # Login user using username/email and password
     def login login, password
@@ -63,13 +55,12 @@ module Authentication
         user
       else
          false
-       end
+      end
     end
 
     def destroy_session access_token
       api_token = ApiToken.eager_load(:user).where("api_tokens.access_token = ?", access_token).first
       # Delete user's access token from the database
-
       if api_token
         # Delete user's access token from Redis
         # helpers/redis_helper
@@ -81,4 +72,12 @@ module Authentication
     end
 
   end
+
+  # Instanse methods
+
+  def refresh_token
+    api_token = api_tokens.create
+    api_token.access_token
+  end
+
 end

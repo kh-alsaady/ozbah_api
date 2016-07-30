@@ -2,7 +2,6 @@ class Api::V1::SessionsController < Api::V1::BaseController
   skip_before_action :authenticate, only: [:create]
 
   def create
-
     missing_params = check_required_params params, [:login, :password]
     return  render_response false, I18n.t('missing_params') + missing_params.join(', '), {}, 400 unless missing_params.empty?
 
