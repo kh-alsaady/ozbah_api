@@ -9,8 +9,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-        resource :sessions, only: [:create, :destroy]
-        resource :profile, only: [:show]
+        resource  :sessions, only: [:create, :destroy]
+        resource  :profile, only: [:show]
+        resources :users, path: 'user', as: 'user', only: [] do
+          get :comming_tasks, on: :collection
+        end
+        resources :archived_tasks, path: 'archive', as: 'archive', only: [] do
+          get :search, on: :collection
+        end
     end
   end
 
