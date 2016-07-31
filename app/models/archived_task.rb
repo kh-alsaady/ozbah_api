@@ -23,10 +23,10 @@ class ArchivedTask < ApplicationRecord
 
       # Archive task (tasks_count) times
       count.times do |i|
-    
+
         new_archived_user = next_user unless  next_user.nil?
         # set created_at date
-        creation_date = ( i == 0) ? DateTime.now : DateTime.now + i.day
+        creation_date = ( i == 0) ? Date.today : Date.today + i.day
 
         order_new_archived_user = UserTaskOrder.user_order(new_archived_user.id, task.id)
         # Get Next user
@@ -73,23 +73,9 @@ class ArchivedTask < ApplicationRecord
     # last_archive_task.user if last_archive_task
   end
 
-  # Remove daily archived tasks old than 1 month
-  def self.delete_daily_archived_tasks
-    date = self.daily_tasks.last.created_at - 1.month
-    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all
-  end
-
-  # Remove weekly archived tasks old than 3 month
-  def self.delete_weekly_archived_tasks
-    date = self.weekly_tasks.last.created_at - 3.month
-    self.weekly_tasks.where("archived_tasks.created_at < ?", date).destroy_all
-  end
-
-  def comming_task
-
-  end
-
-  def next_tasks
+  def self.search date
+    date = Date.parse(date)
+    eager_load(:user, :task).where("archived_tasks.created_at = ?", date)
   end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730085224) do
+ActiveRecord::Schema.define(version: 20160731055155) do
 
   create_table "api_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "access_token"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160730085224) do
   create_table "archived_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.date     "created_at", default: '2016-07-31', null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "status",     default: 0
     t.index ["task_id"], name: "index_archived_tasks_on_task_id", using: :btree
     t.index ["user_id"], name: "index_archived_tasks_on_user_id", using: :btree
