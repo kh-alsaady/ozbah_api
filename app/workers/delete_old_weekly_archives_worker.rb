@@ -1,8 +1,9 @@
-class RemoveWeeklyArchivedTasks
+class DeleteOldWeeklyArchivesWorker
   @queue = :archived_tasks
 
   def self.perform
-    ArchivedTask.delete_weekly_archived_tasks
+    ArchivedTask.delete_old_weekly_archives
+    puts 'DeleteOldWeeklyArchivesWorker'
   end
 
 end

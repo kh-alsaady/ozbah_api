@@ -1,25 +1,38 @@
+#http://www.dataphyx.com/cronsandbox/cronsandboxgui.php
+ArchiveDailyTasksWorker:
+  #mm hh dd monthmonth DoW
+  # cron: "0-59/5 * * * * *"
+  cron: "0 7 28 * *"
+  description:  "This job executed at the end of each month to add all tasks for the next month"
+
+ArchiveWeeklyTasksWorker:
+  # cron: "0-59/5 * * * * *"
+  cron: "0 7 28  * *"
+  description:  "This job executed after each four weeks to add tasks for the next four weeks"
+
 DailyTasksWorker:
   # Everyday at 12:00 PM and 6:00 PM
-  cron: "0 12,18 * * *"
+  # cron: "0-59/10 * * * * *"
+  cron: "0 7,13 * * *"
   # cron: "0-59/30 * * * * *"
-# you can use rufus-scheduler "every" syntax in place of cron if you prefer
-# every: 1h
-# class: "DailyTasksWorker"
-# queue: daily_tasks
-# args:
+  # you can use rufus-scheduler "every" syntax in place of cron if you prefer
+  # every: 1h
+  # class: "DailyTasksWorker"
+  # queue: daily_tasks
+  # args:
   description: "This job executed twice everyday and send email notification for daily tasks"
 
 WeeklyTasksWorker:
-  # Every thursday and friday at 12:00 PM and 6:00 PM
-  cron: '0 12,18 * * 4,5'
+  cron: '0 7,13 * * 5'
   # cron: "0-59/10 * * * * *"
   description:  "This job executed on Thursday and Friday and send email notification for weekly tasks"
 
-RemoveDailyArchivedTasks:
-  cron: "0 12 28 * *"
-  description:  "This job executed at the end of each month to remove the old daily archived  tasks"
+DeleteOldDailyArchivesWorker:
+  # cron: "0-59/10 * * * * *"
+  cron: "0 7 28 1-12/3 *"
+  description:  "This job executed after each three months to remove daily tasks for the older month"
 
-RemoveWeeklyArchivedTasks:
-  # Every thursday and friday at 12:00 PM and 6:00 PM
-  cron: '0 12 28 1-12/3 *'
-  description:  "This job executed after 3 months to remove the old weekly archived  tasks"
+DeleteOldWeeklyArchivesWorker:
+  # cron: "0-59/10 * * * * *"
+  cron: '0 7 28 1-12/3 *'
+  description:  "This job executed after each each eight weeks  to remove weekly tasks for the older four weeks"

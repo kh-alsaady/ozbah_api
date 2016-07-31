@@ -39,16 +39,16 @@ class ArchivedTask < ApplicationRecord
 
   # Delete archives old than 1 month
   def self.delete_old_daily_archives
-    last_archive = self.daily_tasks.where(status: 1).last
+    last_archived_task = self.daily_tasks.where(status: 1).last
     date = last_archived_task.created_at - 1.month
-    self.daily_tasks.where("created_at < ?", date).destroy_all
+    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all
   end
 
   # Delete archives old than 3 month
   def self.delete_old_weekly_archives
-    last_archive = self.weekly_tasks.where(status: 1).last
+    last_archived_task = self.weekly_tasks.where(status: 1).last
     date = last_archived_task.created_at - 3.month
-    self.where("created_at < ?", date).destroy_all
+    self.where("archived_tasks.created_at < ?", date).destroy_all
   end
 
   def self.next_user task_id
