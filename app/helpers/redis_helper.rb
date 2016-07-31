@@ -6,9 +6,12 @@ module RedisHelper
   end
 
   def get_from_redis keys = [], namespace = ''
+    result = []
     keys.each do |k|
-      $redis.del("#{namespace}#{k}")
+      data = $redis.get("#{namespace}#{k}")
+      result << data if data
     end
+    result
   end
 
   def delete_from_redis keys = [], namespace = ''
