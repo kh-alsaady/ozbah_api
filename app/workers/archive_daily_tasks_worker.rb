@@ -1,5 +1,5 @@
 class ArchiveDailyTasksWorker
-  @queue = :daily_tasks
+  @queue = :archived_tasks
 
   def self.perform
     # Get all Daily tasks
