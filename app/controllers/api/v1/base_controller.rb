@@ -33,7 +33,6 @@ class Api::V1::BaseController < ApplicationController
       access_token =  request.headers[:HTTP_ACCESS_TOKEN]
       return render_response(false, I18n.t('login_required'), {}, 401) unless access_token &&
         current_user && get_from_redis(["token_#{access_token}"], "users:user#{@current_user.try(:id)}:").any?
-
     end
 
     def set_locale

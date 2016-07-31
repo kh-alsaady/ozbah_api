@@ -18,6 +18,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
   def destroy
     access_token = request.headers[:HTTP_ACCESS_TOKEN]
     if User.destroy_session access_token
+      @api_token = nil
       render_response true, I18n.t('logout_success'), {}, 200
     else
       render_response false, I18n.t('logout_faild'), {}, 400
