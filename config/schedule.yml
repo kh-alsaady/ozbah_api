@@ -13,7 +13,7 @@ ArchiveWeeklyTasksWorker:
 DailyTasksWorker:
   # Everyday at 12:00 PM and 6:00 PM
   # cron: "0-59/10 * * * * *"
-  cron: "0 7,13 * * *"
+  cron: "0 12 * * *"
   # cron: "0-59/30 * * * * *"
   # you can use rufus-scheduler "every" syntax in place of cron if you prefer
   # every: 1h
@@ -23,7 +23,7 @@ DailyTasksWorker:
   description: "This job executed twice everyday and send email notification for daily tasks"
 
 WeeklyTasksWorker:
-  cron: '0 7,13 * * 5'
+  cron: '0 12 * * 5'
   # cron: "0-59/10 * * * * *"
   description:  "This job executed on Thursday and Friday and send email notification for weekly tasks"
 
