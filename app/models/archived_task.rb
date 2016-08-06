@@ -3,15 +3,11 @@ class ArchivedTask < ApplicationRecord
   belongs_to :task
 
   scope :daily_tasks, -> {
-    includes(:task => :task_type)
-    .where('task_types.name = ?', 'Daily Task')
-    .references(:task => :task_type)
+    eager_load(:task => :task_type).where('task_types.name = ?', 'Daily Task')
   }
 
   scope :weekly_tasks, -> {
-    includes(:task => :task_type)
-    .where('task_types.name = ?', 'Weekly Task')
-    .references(:task => :task_type)
+    eager_load(:task => :task_type).where('task_types.name = ?', 'Weekly Task')
   }
 
   # Add archived tasks to database according to speceified parameter
@@ -40,15 +36,15 @@ class ArchivedTask < ApplicationRecord
   # Delete archives old than 1 month
   def self.delete_old_daily_archives
     last_archived_task = self.daily_tasks.where(status: 1).last
-    date = last_archived_task.created_at - 1.month
-    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all
+    date = last_archived_task.created_at - 1.month if last_archived_task
+    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all if date
   end
 
   # Delete archives old than 3 month
   def self.delete_old_weekly_archives
     last_archived_task = self.weekly_tasks.where(status: 1).last
-    date = last_archived_task.created_at - 3.month
-    self.where("archived_tasks.created_at < ?", date).destroy_all
+    date = last_archived_task.created_at - 3.month if last_archived_task
+    self.weekly_tasks.where("archived_tasks.created_at < ?", date).destroy_all if date
   end
 
   def self.next_user task_id
@@ -62,7 +58,7 @@ class ArchivedTask < ApplicationRecord
 
   # Get last user did this task if not exist git first user for this task
   def self.current_archived_user_in_task task_id
-    current_archived_task = self.find_by(task_id: task_id, status: 1)
+    current_archived_task = self.where(task_id: task_id, status: 1).last
     current_archived_task.user if current_archived_task.present?
   end
 
