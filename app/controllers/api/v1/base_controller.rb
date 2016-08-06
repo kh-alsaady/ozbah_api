@@ -23,14 +23,17 @@ class Api::V1::BaseController < ApplicationController
 
     # set current_user user
     def current_user
-      access_token =  request.headers[:HTTP_ACCESS_TOKEN]
+      # access_token =  request.headers[:HTTP_ACCESS_TOKEN]
+      access_token =  request.headers[:Authorization]
       @api_token ||= ApiToken.eager_load(:user).where("access_token = ?", access_token).first
       @current_user = @api_token.user if @api_token
     end
 
     # Check if user is authenticated
     def authenticate
-      access_token =  request.headers[:HTTP_ACCESS_TOKEN]
+
+      # access_token =  request.headers[:HTTP_ACCESS_TOKEN]
+      access_token =  request.headers[:Authorization]
       return render_response(false, I18n.t('login_required'), {}, 401) unless access_token &&
         current_user && get_from_redis(["token_#{access_token}"], "users:user#{@current_user.try(:id)}:").any?
     end
