@@ -59,6 +59,6 @@ test:
 #
 production:
   <<: *default
-  database: ozbah_api_production
-  username: ozbah_api
-  password: <%= ENV['OZBAH_API_DATABASE_PASSWORD'] %>
+  # database: ozbah_api_production
+  # username: ozbah_api
+  # password: <%= ENV['OZBAH_API_DATABASE_PASSWORD'] %>
