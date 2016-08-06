@@ -1,5 +1,6 @@
 class CommingTaskSerializer < ActiveModel::Serializer
-  attributes :date, :task_name
+  attribute :task_name
+  attribute :date, unless: -> {is_today_task?}
 
   def date
     object.created_at.strftime("%A %d-%m-%Y")

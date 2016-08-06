@@ -29,4 +29,4 @@ en:
   missing_params: 'Missing parameters: '
   data_found: 'Data found.'
   data_not_found: 'Data not found'
-  no_daily_task: 'No tasks today, enjoy your time!'
+  no_task_today: 'No tasks today, Enjoy your day!'
