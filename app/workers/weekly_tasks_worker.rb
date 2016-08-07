@@ -6,7 +6,7 @@ class WeeklyTasksWorker
   def self.perform
     weekly_tasks = Task.weekly_tasks
     CommonHelper.notify_users_for_tasks weekly_tasks
-    puts 'WeeklyTasksWorker'
+    puts 'WeeklyTasksWorker Executed'
   end
 
 end

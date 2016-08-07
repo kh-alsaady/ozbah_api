@@ -38,17 +38,13 @@ class ArchivedTask < ApplicationRecord
   end
 
   # Delete archives old than 1 month
-  def self.delete_old_daily_archives
-    last_archived_task = self.daily_tasks.where(status: 1).last
-    date = last_archived_task.created_at - 1.month if last_archived_task
-    self.daily_tasks.where("archived_tasks.created_at < ?", date).destroy_all if date
+  def self.delete_old_daily_archives date
+    self.daily_tasks.where("archived_tasks.created_at < ?", Date.today - date).destroy_all
   end
 
   # Delete archives old than 3 month
-  def self.delete_old_weekly_archives
-    last_archived_task = self.weekly_tasks.where(status: 1).last
-    date = last_archived_task.created_at - 3.month if last_archived_task
-    self.weekly_tasks.where("archived_tasks.created_at < ?", date).destroy_all if date
+  def self.delete_old_weekly_archives date
+    self.weekly_tasks.where("archived_tasks.created_at < ?", Date.today - date).destroy_all
   end
 
   def self.next_user task_id
@@ -59,19 +55,11 @@ class ArchivedTask < ApplicationRecord
     current_archived_user.present?  ? UserTaskOrder.next_user(task_id, order_current_user) : UserTaskOrder.first_user_in_task(task_id)
   end
 
-
   # Get last user did this task if not exist git first user for this task
   def self.current_archived_user_in_task task_id
     current_archived_task = self.where(task_id: task_id, status: 1).last
     current_archived_task.user if current_archived_task.present?
   end
-
-  # def self.last_archived_task_for task_type
-  #   last_archive_task = self.includes(:task => :task_type)
-  #     .where('task_types.name = ?', task_type)
-  #     .references(:task => :task_type).last
-  #   # last_archive_task.user if last_archive_task
-  # end
 
   def self.search date
     date = Date.parse(date)

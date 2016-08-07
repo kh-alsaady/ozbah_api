@@ -4,7 +4,7 @@ class NotifierMailer < ApplicationMailer
     @task, @user = task, user
     @task_type = task.task_type.name
 
-    mail to: @user.email, subject: "Your Ozbah #{@task_type}"
+    mail to: @user.email, subject: "Ozbah #{@task_type}"
   end
 
 end
