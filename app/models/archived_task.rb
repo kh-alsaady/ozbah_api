@@ -14,7 +14,7 @@ class ArchivedTask < ApplicationRecord
 
   # Add archived tasks to database n times according to speceified parameter
   def self.archive_daily_tasks count
-    Task.weekly_tasks.each do |task|
+    Task.daily_tasks.each do |task|
       last_archive     = self.last_archive_for_task(task.id)
       last_stored_user = last_archive.try(:user)
       next_user        = nil
@@ -38,7 +38,7 @@ class ArchivedTask < ApplicationRecord
   end
 
   def self.archive_weekly_tasks count
-    Task.daily_tasks.each do |task|
+    Task.weekly_tasks.each do |task|
       last_archive     = self.last_archive_for_task(task.id)
       last_stored_user = last_archive.try(:user)
       next_user        = nil
