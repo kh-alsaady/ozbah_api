@@ -13,8 +13,8 @@ class ArchivedTask < ApplicationRecord
   scope :last_archive_for_task, -> (task_id) { where(task_id: task_id).last }
 
   # Add archived tasks to database n times according to speceified parameter
-  def self.archive_tasks tasks, count
-    tasks.each do |task|
+  def self.archive_daily_tasks count
+    Task.weekly_tasks.each do |task|
       last_archive     = self.last_archive_for_task(task.id)
       last_stored_user = last_archive.try(:user)
       next_user        = nil
@@ -29,6 +29,30 @@ class ArchivedTask < ApplicationRecord
         end
 
         creation_date = ( i == 0) ? Date.today : Date.today + i.day
+
+        ArchivedTask.create user: next_user, task: task, status: 0, created_at: creation_date
+
+        last_stored_user = next_user
+      end
+    end
+  end
+
+  def self.archive_weekly_tasks count
+    Task.daily_tasks.each do |task|
+      last_archive     = self.last_archive_for_task(task.id)
+      last_stored_user = last_archive.try(:user)
+      next_user        = nil
+
+      # Archive task (n) times
+      count.times do |i|
+        if last_stored_user.nil?
+          next_user = UserTaskOrder.first_user_in_task(task.id)
+        else
+          order_last_stored_user = UserTaskOrder.user_order(last_stored_user.id, task.id)
+          next_user = UserTaskOrder.next_user(task.id, order_last_stored_user)
+        end
+
+        creation_date = ( i == 0) ? Date.today : (Date.today + 7.days)
 
         ArchivedTask.create user: next_user, task: task, status: 0, created_at: creation_date
 
