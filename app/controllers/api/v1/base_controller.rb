@@ -31,7 +31,6 @@ class Api::V1::BaseController < ApplicationController
 
     # Check if user is authenticated
     def authenticate
-
       # access_token =  request.headers[:HTTP_ACCESS_TOKEN]
       access_token =  request.headers[:Authorization]
       return render_response(false, I18n.t('login_required'), {}, 401) unless access_token &&

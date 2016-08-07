@@ -13,4 +13,5 @@ class User < ApplicationRecord
     archived_tasks.eager_load(:task).where("archived_tasks.status = 0 ").order("archived_tasks.created_at")
   end
 
+
 end

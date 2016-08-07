@@ -12,60 +12,31 @@ class ArchivedTask < ApplicationRecord
 
   scope :last_archive_for_task, -> (task_id) { where(task_id: task_id).last }
 
-  # Add archived tasks to database according to speceified parameter
+  # Add archived tasks to database n times according to speceified parameter
   def self.archive_tasks tasks, count
     tasks.each do |task|
-      # get last stored user or first user if no user stored yet
       last_archive     = self.last_archive_for_task(task.id)
       last_stored_user = last_archive.try(:user)
+      next_user        = nil
 
-      # next_user = nil
-
-      # unless last_stored_user
-      #   new_user = UserTaskOrder.first_user_in_task(task.id)
-      # end
-
-      order_last_stored_user = UserTaskOrder.user_order(last_stored_user.id, task.id)
-      # Get Next user
-      next_user = UserTaskOrder.next_user(task.id, order_last_stored_user)
-
-      # Archive task (tasks_count) times
+      # Archive task (n) times
       count.times do |i|
-        new_user = next_user
-        # set created_at date
+        if last_stored_user.nil?
+          next_user = UserTaskOrder.first_user_in_task(task.id)
+        else
+          order_last_stored_user = UserTaskOrder.user_order(last_stored_user.id, task.id)
+          next_user = UserTaskOrder.next_user(task.id, order_last_stored_user)
+        end
+
         creation_date = ( i == 0) ? Date.today : Date.today + i.day
 
-        ArchivedTask.create user: new_user, task: task, status: 0, created_at: creation_date
+        ArchivedTask.create user: next_user, task: task, status: 0, created_at: creation_date
 
-        order_new_user = UserTaskOrder.user_order(new_user.id, task.id)
-        # Get Next user
-        next_user = UserTaskOrder.next_user(task.id, order_new_user)
+        last_stored_user = next_user
       end
     end
   end
-  #================================================
-  # def self.archive_tasks tasks, count
-  #   tasks.each do |task|
-  #
-  #     new_archived_user = self.next_user task.id
-  #     next_user = nil
-  #
-  #     # Archive task (tasks_count) times
-  #     count.times do |i|
-  #
-  #       new_archived_user = next_user unless  next_user.nil?
-  #       # set created_at date
-  #       creation_date = ( i == 0) ? Date.today : Date.today + i.day
-  #
-  #       order_new_archived_user = UserTaskOrder.user_order(new_archived_user.id, task.id)
-  #       # Get Next user
-  #       next_user = UserTaskOrder.next_user(task.id, order_new_archived_user)
-  #
-  #       ArchivedTask.create user: new_archived_user, task: task, status: 0, created_at: creation_date
-  #     end
-  #   end
-  # end
-# ================================================
+
   # Delete archives old than 1 month
   def self.delete_old_daily_archives
     last_archived_task = self.daily_tasks.where(status: 1).last

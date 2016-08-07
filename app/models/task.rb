@@ -15,4 +15,12 @@ class Task < ApplicationRecord
     .references(:task_type)
   }
 
+  def self.today_tasks tasks
+    tasks.select{ |t| t.created_at == Date.today }
+  end
+
+  def self.next_tasks tasks
+    tasks.select{ |t| t.created_at != Date.today }
+  end
+
 end
