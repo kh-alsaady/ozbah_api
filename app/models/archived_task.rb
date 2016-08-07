@@ -52,7 +52,7 @@ class ArchivedTask < ApplicationRecord
           next_user = UserTaskOrder.next_user(task.id, order_last_stored_user)
         end
 
-        creation_date = ( i == 0) ? Date.today : (Date.today + 7.days)
+        creation_date = ( i == 0) ? Date.today : (Date.today + (i * 7).days)
 
         ArchivedTask.create user: next_user, task: task, status: 0, created_at: creation_date
 
