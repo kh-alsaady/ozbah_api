@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-  # before_action :cors_set_access_control_headers
+  before_action :cors_set_access_control_headers
   # Action to follow routes with HTTP verb 'OPTIONS'
   def cors
     headers['Access-Control-Allow-Origin'] = '*'
@@ -13,13 +13,13 @@ class ApplicationController < ActionController::API
 
 
   # This method will set the access control header accordingly after each action performed.
-	# def cors_set_access_control_headers
-  # 	headers['Access-Control-Allow-Origin'] = '*'
-  # 	headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
-  # 	# headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token'
-  #   headers['Access-Control-Allow-Headers'] = '*'
-  # 	headers['Access-Control-Max-Age'] = "1728000"
-  # end
+	def cors_set_access_control_headers
+  	headers['Access-Control-Allow-Origin'] = '*'
+  	headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+  	headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token'
+    headers['Access-Control-Allow-Headers'] = '*'
+  	headers['Access-Control-Max-Age'] = "1728000"
+  end
 
 # def cors_set_access_control_headers
 #     headers['Access-Control-Allow-Origin'] = '*'
