@@ -1,19 +1,19 @@
 #http://www.dataphyx.com/cronsandbox/cronsandboxgui.php
 ArchiveDailyTasksWorker:
   #mm hh dd monthmonth DoW
-  cron: "0-59/5 * * * * *"
-  # cron: "0 7 28 * *"
+  # cron: "0-59/5 * * * * *"
+  cron: "0 12 28 * *"
   description:  "This job executed at the end of each month to add all tasks for the next month"
 
 ArchiveWeeklyTasksWorker:
-  cron: "0-59/5 * * * * *"
-  # cron: "0 7 28  * *"
+  # cron: "0-59/5 * * * * *"
+  cron: "0 12 28  * *"
   description:  "This job executed after each four weeks to add tasks for the next four weeks"
 
 DailyTasksWorker:
   # Everyday at 12:00 PM and 6:00 PM
-  cron: "0-59/5 * * * * *"
-  # cron: "0 13 * * *"
+  # cron: "0-59/5 * * * * *"
+  cron: "0 12 * * *"
   # cron: "0-59/30 * * * * *"
   # you can use rufus-scheduler "every" syntax in place of cron if you prefer
   # every: 1h
@@ -23,16 +23,16 @@ DailyTasksWorker:
   description: "This job executed twice everyday and send email notification for daily tasks"
 
 WeeklyTasksWorker:
-  # cron: '0 13 * * 5'
-  cron: "0-59/5 * * * * *"
+  cron: '0 12 * * 5'
+  # cron: "0-59/5 * * * * *"
   description:  "This job executed on Thursday and Friday and send email notification for weekly tasks"
 
 DeleteOldDailyArchivesWorker:
-  cron: "0-59/10 * * * * *"
-  # cron: "0 7 28 1-12/3 *"
+  # cron: "0-59/10 * * * * *"
+  cron: "0 12 28 1-12/3 *"
   description:  "This job executed after each three months to remove daily tasks for the older month"
 
 DeleteOldWeeklyArchivesWorker:
-  cron: "0-59/10 * * * * *"
-  # cron: '0 7 28 1-12/3 *'
+  # cron: "0-59/10 * * * * *"
+  cron: '0 12 28 1-12/3 *'
   description:  "This job executed after each each eight weeks  to remove weekly tasks for the older four weeks"
